@@ -8,7 +8,7 @@ using Peek.CSV;
 var builder = CoconaApp.CreateBuilder();
 
 //DI CONTAINERS
-builder.Services.AddSingleton<ICsvService, CsvService>();
+builder.Services.AddSingleton<ICsvProcessingService, CsvProcessingService>();
 builder.Services.AddSingleton<ICsvDisplayService, CsvDisplayService>();
 
 var app = builder.Build();

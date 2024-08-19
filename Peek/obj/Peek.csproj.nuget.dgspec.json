@@ -50,6 +50,14 @@
             "Microsoft.Data.Analysis": {
               "target": "Package",
               "version": "[0.21.1, )"
+            },
+            "Spectre.Console": {
+              "target": "Package",
+              "version": "[0.49.1, )"
+            },
+            "Spectre.Console.Cli": {
+              "target": "Package",
+              "version": "[0.49.1, )"
             }
           },
           "imports": [

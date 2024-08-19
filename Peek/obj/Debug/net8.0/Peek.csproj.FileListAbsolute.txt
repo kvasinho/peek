@@ -53,3 +53,9 @@
 /Users/michaelkvasin/csharp/Peek/Peek/bin/Debug/net8.0/Apache.Arrow.dll
 /Users/michaelkvasin/csharp/Peek/Peek/bin/Debug/net8.0/Microsoft.Data.Analysis.dll
 /Users/michaelkvasin/csharp/Peek/Peek/bin/Debug/net8.0/Microsoft.ML.DataView.dll
+/Users/michaelkvasin/csharp/Peek/Peek/obj/Debug/net8.0/Peek.sourcelink.json
+/Users/michaelkvasin/csharp/Peek/Peek/bin/Debug/net8.0/Spectre.Console.dll
+/Users/michaelkvasin/csharp/Peek/Peek/bin/Debug/net8.0/Spectre.Console.Cli.dll
+/Users/michaelkvasin/csharp/Peek/Peek/bin/Debug/net8.0/de/Spectre.Console.Cli.resources.dll
+/Users/michaelkvasin/csharp/Peek/Peek/bin/Debug/net8.0/fr/Spectre.Console.Cli.resources.dll
+/Users/michaelkvasin/csharp/Peek/Peek/bin/Debug/net8.0/sv/Spectre.Console.Cli.resources.dll
