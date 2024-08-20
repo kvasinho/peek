@@ -6,10 +6,10 @@ using Peek.Util;
 using Spectre.Console;
 using Spectre.Console.Cli;
 
-namespace Peek.Commands.Describe;
+namespace Peek.Commands.Dimensions;
 
 
-public sealed class DescribeCommand : Command<DescribeCommand.Settings>
+public sealed class DimensionsCommand : Command<DimensionsCommand.Settings>
 //Commands are just the formatters and error checks. 
 //Tables are created in the TableGeneratorService
 //Utils and Extensions are used to generate the numbers
@@ -24,7 +24,7 @@ public sealed class DescribeCommand : Command<DescribeCommand.Settings>
     
     private readonly ITableGeneratorService _tableGeneratorService;
 
-    public DescribeCommand(ITableGeneratorService tableGeneratorService)
+    public DimensionsCommand(ITableGeneratorService tableGeneratorService)
     {
         _tableGeneratorService = tableGeneratorService;
     }
@@ -44,7 +44,6 @@ public sealed class DescribeCommand : Command<DescribeCommand.Settings>
                 FileUtils.GetFileSize(settings.FilePath), 
                 df.GetDimensions()
                 );
-
             
             AnsiConsole.Write(table);
             Console.WriteLine(df.Info());

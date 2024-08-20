@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Peek.Commands.Describe;
+using Peek.Commands.Dimensions;
 using Peek.Commands.Head;
 using Peek.CSV;
 using Peek.Services;
@@ -24,8 +24,8 @@ app.Configure(config =>
     config.AddCommand<HeadCommand>("head")
         .WithDescription("Displays the first rows of a dataframe");
 
-        config.AddCommand<DescribeCommand>("describe")
-            .WithDescription("Shows descriptive stats for csv columns");
+    config.AddCommand<DimensionsCommand>("dimensions")
+        .WithDescription("Shows number of rows, columns, as well as file size.");
        
 });
 
