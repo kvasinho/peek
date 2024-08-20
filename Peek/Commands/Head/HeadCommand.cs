@@ -1,6 +1,5 @@
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using Peek.Commands.CommonCommands;
+using Peek.Commands.CommonParameters;
 using Peek.CSV;
 using Peek.Util;
 using Spectre.Console;
@@ -11,7 +10,7 @@ namespace Peek.Commands.Head;
 
 public sealed class HeadCommand : Command<HeadCommand.Settings>
 {
-    public sealed class Settings : CommonCommandSettings // Inherit from CommonCommandSettings
+    public sealed class Settings : CommonParameterSettings // Inherit from CommonCommandSettings
     {
         [Description("Specifies whether to show the first or last n rows")]
         [CommandOption("-t|--tail")]
@@ -27,7 +26,7 @@ public sealed class HeadCommand : Command<HeadCommand.Settings>
         _csvService = csvService;
         _csvDisplayService = csvDisplayService;
     }
-    public override int Execute([NotNull] CommandContext context, [NotNull] Settings settings)
+    public override int Execute(CommandContext context, Settings settings)
     {
         try
         {
@@ -54,32 +53,6 @@ public sealed class HeadCommand : Command<HeadCommand.Settings>
             
             AnsiConsole.Write(table);
             
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
-        return 0;
-    }
-}
-
-public sealed class TestCommand : Command<TestCommand.Settings>
-{
-    public sealed class Settings : CommandSettings 
-    {
-        [Description("Specifies whether to show the first or last n rows")]
-        [CommandOption("-t|--tail")]
-        [DefaultValue(false)]
-        public bool Tail { get; init; }
-    }
-    
-
-    public override int Execute([NotNull] CommandContext context, [NotNull] Settings settings)
-    {
-        try
-        {
-            AnsiConsole.Write(new Markup("[bold yellow]Hello[/] [red]World![/]"));
-
         }
         catch (Exception ex)
         {

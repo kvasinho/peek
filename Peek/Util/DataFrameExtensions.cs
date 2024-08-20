@@ -25,8 +25,27 @@ public static class DataFrameExtensions
     
     public static void GetMetaData(this DataFrameColumn column, Table table)
     {
-        var nullCount = column.NullCount;
-        var uniqueVals = column.ValueCounts();
-        
+        //var nullCount = column.NullCount;
+       // var uniqueVals = column.ValueCounts();
     }
+
+    public static ICollection<string> GetColumnNames(this DataFrame dataFrame)
+    {
+        return dataFrame.Columns.Select(col => col.Name).ToList();
+    }
+
+    public static Dimension GetDimensions(this DataFrame dataFrame)
+    {
+        return new Dimension()
+        {
+            rows = dataFrame.Rows.Count(),
+            columns = dataFrame.Columns.Count()
+        };
+    }
+}
+
+public struct Dimension
+{
+    public int rows { get; set; }
+    public int columns { get; set; }
 }
