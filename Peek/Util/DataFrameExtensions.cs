@@ -22,12 +22,11 @@ public static class DataFrameExtensions
             table.AddColumn(new TableColumn($"[bold blue]{row[i].ToString()!.ToUpper()}[/]").Centered());
         }                
     }
-
+    
     public static void GetMetaData(this DataFrameColumn column, Table table)
     {
         var nullCount = column.NullCount;
         var uniqueVals = column.ValueCounts();
         
-
     }
 }

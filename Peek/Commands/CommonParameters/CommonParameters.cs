@@ -1,12 +1,28 @@
-using Cocona;
+using System.ComponentModel;
 
-namespace Peek.Commands.CommonParameters;
+using Spectre.Console.Cli;
 
-public record CommonParameterCollection(
-    [Option("header",['h'], Description = "Specifies whether a header exists")]
-    bool Header,
-    [Option("nrows", ['n'], Description = "Specifies the number of rows to read. Reads all rows if none specified")]
-    Int32 NRows = 0,
-    [Option("delimiter", ['d'], Description = "Specifies the delimiter")]
-    char Delimiter = ','
-) : ICommandParameterSet;
+namespace Peek.Commands.CommonCommands;
+
+
+public abstract class CommonCommandSettings : CommandSettings
+{
+    [CommandArgument(0, "<filepath>")]
+    [Description("Specifies the path of where to find the file ")]
+    public string FilePath { get; set; }
+
+    [CommandOption("--delimiter|-d")]
+    [Description("Specifies the delimiter of the file. Defaults to ','. ")]
+    [DefaultValue(',')]
+    public char Delimiter { get; set; }
+
+    [CommandOption("--header")]
+    [Description("Denotes an existing header in the file")]
+    [DefaultValue(true)]
+    public bool Header { get; set; }
+
+    [CommandOption("--nrows")]
+    [Description("Specifies the number of rows to read. Defaults to all, if not specified. Defaults to 5 in Head Command")]
+    [DefaultValue(0)]
+    public int NRows { get; set; }
+}

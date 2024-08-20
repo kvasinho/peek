@@ -1,18 +1,28 @@
-﻿using System.Text.Json;
-using Cocona;
-using Microsoft.Extensions.DependencyInjection;
-using Peek;
-using Peek.Commands.PeekCommand;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Peek.Commands.Head;
 using Peek.CSV;
-
-var builder = CoconaApp.CreateBuilder();
-
-//DI CONTAINERS
-builder.Services.AddSingleton<ICsvProcessingService, CsvProcessingService>();
-builder.Services.AddSingleton<ICsvDisplayService, CsvDisplayService>();
-
-var app = builder.Build();
-app.AddCommands<PeekCommand>();
+using Spectre.Console.Cli;
 
 
-app.Run();
+var services = new ServiceCollection();
+services.AddSingleton<ICsvProcessingService, CsvProcessingService>();
+services.AddSingleton<ICsvDisplayService, CsvDisplayService>();
+
+var registrar = new TypeRegistrar(services);
+
+
+
+var app = new CommandApp(registrar); 
+
+app.Configure(config =>
+{
+    
+    config.AddCommand<HeadCommand>("head")
+        .WithDescription("Displays the first rows of a dataframe")
+        .WithAlias("peek");
+    
+
+    config.AddCommand<TestCommand>("test");
+});
+
+return app.Run(args);
