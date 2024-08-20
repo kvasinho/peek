@@ -2,14 +2,14 @@ using System.ComponentModel;
 
 using Spectre.Console.Cli;
 
-namespace Peek.Commands.CommonCommands;
+namespace Peek.Commands.CommonParameters;
 
 
-public abstract class CommonCommandSettings : CommandSettings
+public abstract class CommonParameterSettings : CommandSettings
 {
     [CommandArgument(0, "<filepath>")]
     [Description("Specifies the path of where to find the file ")]
-    public string FilePath { get; set; }
+    public required string FilePath { get; set; }
 
     [CommandOption("--delimiter|-d")]
     [Description("Specifies the delimiter of the file. Defaults to ','. ")]

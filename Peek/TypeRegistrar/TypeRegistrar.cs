@@ -1,6 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Spectre.Console.Cli;
-using System;
+
+namespace Peek.TypeRegistrar;
 
 public class TypeRegistrar : ITypeRegistrar
 {

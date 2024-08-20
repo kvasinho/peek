@@ -1,12 +1,16 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Peek.Commands.Describe;
 using Peek.Commands.Head;
 using Peek.CSV;
+using Peek.Services;
 using Spectre.Console.Cli;
+using Peek.TypeRegistrar;
 
 
 var services = new ServiceCollection();
 services.AddSingleton<ICsvProcessingService, CsvProcessingService>();
 services.AddSingleton<ICsvDisplayService, CsvDisplayService>();
+services.AddSingleton<ITableGeneratorService, TableGeneratorService>();
 
 var registrar = new TypeRegistrar(services);
 
@@ -18,11 +22,11 @@ app.Configure(config =>
 {
     
     config.AddCommand<HeadCommand>("head")
-        .WithDescription("Displays the first rows of a dataframe")
-        .WithAlias("peek");
-    
+        .WithDescription("Displays the first rows of a dataframe");
 
-    config.AddCommand<TestCommand>("test");
+        config.AddCommand<DescribeCommand>("describe")
+            .WithDescription("Shows descriptive stats for csv columns");
+       
 });
 
 return app.Run(args);

@@ -1,7 +1,7 @@
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using Peek.Commands.CommonCommands;
-using Peek.CSV;
+using Microsoft.Data.Analysis;
+using Peek.Commands.CommonParameters;
+using Peek.Services;
 using Peek.Util;
 using Spectre.Console;
 using Spectre.Console.Cli;
@@ -10,8 +10,11 @@ namespace Peek.Commands.Describe;
 
 
 public sealed class DescribeCommand : Command<DescribeCommand.Settings>
+//Commands are just the formatters and error checks. 
+//Tables are created in the TableGeneratorService
+//Utils and Extensions are used to generate the numbers
 {
-    public sealed class Settings : CommonCommandSettings
+    public sealed class Settings : CommonParameterSettings
     {
         [Description("Specifies whether to show the first or last n rows")]
         [CommandOption("-t|--tail")]
@@ -19,66 +22,32 @@ public sealed class DescribeCommand : Command<DescribeCommand.Settings>
         public bool Tail { get; init; }
     }
     
-    private readonly ICsvProcessingService _csvService;
-    private readonly ICsvDisplayService _csvDisplayService;
+    private readonly ITableGeneratorService _tableGeneratorService;
 
-    public DescribeCommand(ICsvProcessingService csvService, ICsvDisplayService csvDisplayService)
+    public DescribeCommand(ITableGeneratorService tableGeneratorService)
     {
-        _csvService = csvService;
-        _csvDisplayService = csvDisplayService;
+        _tableGeneratorService = tableGeneratorService;
     }
-    public override int Execute([NotNull] CommandContext context, [NotNull] Settings settings)
+    
+    public override int Execute(CommandContext context, Settings settings)
     {
         try
         {
-            var subset = _csvService.ReadCsvSync(
-                settings.FilePath.Trim(),
+            var df = DataFrame.LoadCsv(
+                settings.FilePath,
                 settings.Delimiter,
-                !settings.Header,
-                settings.NRows == 0 ? 6 : Math.Min(100, settings.NRows) + 1);
+                settings.Header
+                )!;
 
-            var table = new Table();
+            var table = _tableGeneratorService.CreateDimensionsTable(
+                settings.FilePath.GetFileName(),
+                FileUtils.GetFileSize(settings.FilePath), 
+                df.GetDimensions()
+                );
 
-
-            for (var i = 0; i < subset.Rows.Count(); i++)
-            {
-                if (i == 0)
-                {
-                    subset.Rows[i].AddDataFrameRowAsSpectreTableHeader(table);
-                }
-                else
-                {
-                    subset.Rows[i].AddDataFrameRowToSpectreTable(table);
-                }
-            }
             
             AnsiConsole.Write(table);
-            
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
-        return 0;
-    }
-}
-
-public sealed class TestCommand : Command<TestCommand.Settings>
-{
-    public sealed class Settings : CommandSettings 
-    {
-        [Description("Specifies whether to show the first or last n rows")]
-        [CommandOption("-t|--tail")]
-        [DefaultValue(false)]
-        public bool Tail { get; init; }
-    }
-    
-
-    public override int Execute([NotNull] CommandContext context, [NotNull] Settings settings)
-    {
-        try
-        {
-            AnsiConsole.Write(new Markup("[bold yellow]Hello[/] [red]World![/]"));
+            Console.WriteLine(df.Info());
 
         }
         catch (Exception ex)

@@ -8,7 +8,7 @@ public interface ICsvProcessingService
 
 public class CsvProcessingService : ICsvProcessingService
 {
-    public  DataFrame ReadCsvSync(string path, char separator, bool head, Int32  nRows)
+    public  DataFrame ReadCsvSync(string path, char separator, bool head, Int32  nRows = -1)
     {
         if (!File.Exists(path))
         {

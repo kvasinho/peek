@@ -7,6 +7,8 @@
         <Nullable>enable</Nullable>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
         <PublishAot>true</PublishAot>
+        <NoWarn>CS8767;CS8603;IL2067</NoWarn> <!-- Suppresses multiple warnings -->
+
     </PropertyGroup>
 
     <ItemGroup>
