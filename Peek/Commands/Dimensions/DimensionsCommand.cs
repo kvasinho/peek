@@ -31,13 +31,16 @@ public sealed class DimensionsCommand : Command<DimensionsCommand.Settings>
     
     public override int Execute(CommandContext context, Settings settings)
     {
+        Console.WriteLine("test");
         try
         {
+
             var df = DataFrame.LoadCsv(
                 settings.FilePath,
                 settings.Delimiter,
                 settings.Header
                 )!;
+
 
             var table = _tableGeneratorService.CreateDimensionsTable(
                 settings.FilePath.GetFileName(),
@@ -45,6 +48,7 @@ public sealed class DimensionsCommand : Command<DimensionsCommand.Settings>
                 df.GetDimensions()
                 );
             
+
             AnsiConsole.Write(table);
             Console.WriteLine(df.Info());
 

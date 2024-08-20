@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Peek.Commands.Convert;
 using Peek.Commands.Dimensions;
 using Peek.Commands.Head;
 using Peek.CSV;
@@ -26,7 +27,9 @@ app.Configure(config =>
 
     config.AddCommand<DimensionsCommand>("dimensions")
         .WithDescription("Shows number of rows, columns, as well as file size.");
-       
+
+    config.AddCommand<ConvertCommand>("convert")
+        .WithDescription("Converts a csv to json");
 });
 
 return app.Run(args);

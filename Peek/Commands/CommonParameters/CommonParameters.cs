@@ -25,4 +25,16 @@ public abstract class CommonParameterSettings : CommandSettings
     [Description("Specifies the number of rows to read. Defaults to all, if not specified. Defaults to 5 in Head Command")]
     [DefaultValue(0)]
     public int NRows { get; set; }
+    
+    [CommandOption("--save")]
+    [Description("Specifies whether or not to save the output ")]
+    [DefaultValue(false)]
+    public bool Save { get; set; }
+
+    [CommandOption("--save-path")]
+    [Description("Specifies the save location ")]
+    [DefaultValue("")]
+    public string SavePath { get; set; }
+
+
 }

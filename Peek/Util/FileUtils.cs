@@ -44,4 +44,34 @@ public static class FileUtils
 
         return filePath.Substring(lastSeparator + 1);
     }
+
+    public enum PathStatus
+    {
+        ValidFreePath,
+        FileExists,
+        MissingDirectories,
+        InvalidPath,
+    }
+
+    public static PathStatus ValidateFilePath(string filePath)
+    {
+        if (string.IsNullOrWhiteSpace(filePath) || filePath.IndexOfAny(Path.GetInvalidPathChars()) >= 0)
+        {
+            return PathStatus.InvalidPath;
+        }
+        
+        string directoryPath = Path.GetDirectoryName(filePath)!;
+        
+        if (!Directory.Exists(directoryPath))
+        {
+            return PathStatus.MissingDirectories;
+        }
+
+        if (File.Exists(filePath))
+        {
+            return PathStatus.FileExists;
+        }
+
+        return PathStatus.ValidFreePath;
+    }
 }

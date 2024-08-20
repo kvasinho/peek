@@ -51,18 +51,6 @@
               "target": "Package",
               "version": "[0.21.1, )"
             },
-            "Microsoft.DotNet.ILCompiler": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[8.0.0, )",
-              "autoReferenced": true
-            },
-            "Microsoft.NET.ILLink.Tasks": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[8.0.0, )",
-              "autoReferenced": true
-            },
             "Spectre.Console": {
               "target": "Package",
               "version": "[0.49.1, )"
@@ -85,7 +73,11 @@
           "warn": true,
           "downloadDependencies": [
             {
-              "name": "runtime.osx-arm64.Microsoft.DotNet.ILCompiler",
+              "name": "Microsoft.AspNetCore.App.Runtime.osx-arm64",
+              "version": "[8.0.0, 8.0.0]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Runtime.osx-arm64",
               "version": "[8.0.0, 8.0.0]"
             }
           ],
@@ -95,6 +87,11 @@
             }
           },
           "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.100/PortableRuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "osx-arm64": {
+          "#import": []
         }
       }
     }

@@ -1,4 +1,4 @@
-Product ID,Product Name,Price,Quantity,Date
+ProductID,Product Name,Price,Quantity,Date
 1001,Laptop,1200.50,10,2023-10-26
 1002,Keyboard,75.99,25,2023-10-25
 1003,Mouse,25.00,50,2023-10-24

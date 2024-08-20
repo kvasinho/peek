@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Peek")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+50cd3190d8b0bf4dca3ad95dbfd1e0ab9a0ac4dd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("Peek")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Peek")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
