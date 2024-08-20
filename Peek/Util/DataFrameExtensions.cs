@@ -15,13 +15,6 @@ public static class DataFrameExtensions
 
         table.AddRow(formattedRow);
     }
-    public static void AddDataFrameRowAsSpectreTableHeader(this DataFrameRow row, Table table)
-    {
-        for (int i = 0; i < row.Count(); i++)
-        {
-            table.AddColumn(new TableColumn($"[bold blue]{row[i].ToString()!.ToUpper()}[/]").Centered());
-        }                
-    }
     
     public static void GetMetaData(this DataFrameColumn column, Table table)
     {
@@ -41,6 +34,11 @@ public static class DataFrameExtensions
             rows = dataFrame.Rows.Count(),
             columns = dataFrame.Columns.Count()
         };
+    }
+
+    public static void DescribeStringColumn(this DataFrameColumn column)
+    {
+        
     }
 }
 

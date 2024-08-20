@@ -43,11 +43,11 @@ public sealed class HeadCommand : Command<HeadCommand.Settings>
             {
                 if (i == 0)
                 {
-                    subset.Rows[i].AddDataFrameRowAsSpectreTableHeader(table);
+                    table.AddDataFrameHeader(subset.Rows[i]);
                 }
                 else
                 {
-                    subset.Rows[i].AddDataFrameRowToSpectreTable(table);
+                    table.AddDataFrameRow(subset.Rows[i]);
                 }
             }
             
